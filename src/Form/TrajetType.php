@@ -18,8 +18,7 @@ class TrajetType extends AbstractType
             ->add('date_arrivee')
             ->add('heure_depart')
             ->add('heure_arrivee')
-            ->add('relation')
-            ->add('trajet')
+            ->add('train')
         ;
     }
 

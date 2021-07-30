@@ -20,7 +20,7 @@ class Train
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $numero_train;
 
@@ -47,11 +47,13 @@ class Train
     /**
      * @ORM\OneToMany(targetEntity=Trajet::class, mappedBy="train")
      */
-    private $trajet;
+    private $trajets;
+
 
     public function __construct()
     {
         $this->trajet = new ArrayCollection();
+        $this->trajets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -106,6 +108,10 @@ class Train
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->numero_train;
+    }
 
     public function getDateArrivee(): ?\DateTimeInterface
     {
@@ -122,15 +128,15 @@ class Train
     /**
      * @return Collection|Trajet[]
      */
-    public function getTrajet(): Collection
+    public function getTrajets(): Collection
     {
-        return $this->trajet;
+        return $this->trajets;
     }
 
     public function addTrajet(Trajet $trajet): self
     {
-        if (!$this->trajet->contains($trajet)) {
-            $this->trajet[] = $trajet;
+        if (!$this->trajets->contains($trajet)) {
+            $this->trajets[] = $trajet;
             $trajet->setTrain($this);
         }
 
@@ -139,7 +145,7 @@ class Train
 
     public function removeTrajet(Trajet $trajet): self
     {
-        if ($this->trajet->removeElement($trajet)) {
+        if ($this->trajets->removeElement($trajet)) {
             // set the owning side to null (unless already changed)
             if ($trajet->getTrain() === $this) {
                 $trajet->setTrain(null);
@@ -148,4 +154,6 @@ class Train
 
         return $this;
     }
+
+
 }

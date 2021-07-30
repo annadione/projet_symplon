@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TrajetRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -47,12 +49,20 @@ class Trajet
      */
     private $heure_arrivee;
 
-    
-
     /**
-     * @ORM\ManyToOne(targetEntity=Train::class, inversedBy="trajet")
+     * @ORM\ManyToOne(targetEntity=Train::class, inversedBy="trajets")
      */
     private $train;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="trajet")
+     */
+    private $reservation;
+
+    public function __construct()
+    {
+        $this->reservation = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -131,10 +141,6 @@ class Trajet
         return $this;
     }
 
-
-
-
-
     public function getTrain(): ?Train
     {
         return $this->train;
@@ -143,6 +149,36 @@ class Trajet
     public function setTrain(?Train $train): self
     {
         $this->train = $train;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getReservation(): Collection
+    {
+        return $this->reservation;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservation->contains($reservation)) {
+            $this->reservation[] = $reservation;
+            $reservation->setTrajet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservation->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getTrajet() === $this) {
+                $reservation->setTrajet(null);
+            }
+        }
 
         return $this;
     }

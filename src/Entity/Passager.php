@@ -49,6 +49,8 @@ class Passager
         $this->reservations = new ArrayCollection();
     }
 
+
+
     
 
     public function getId(): ?int
@@ -102,6 +104,13 @@ class Passager
         $this->telephone = $telephone;
 
         return $this;
+    }
+
+    
+
+    public function __toString()
+    {
+        return $this->prenom.' '.$this->nom;
     }
 
     /**

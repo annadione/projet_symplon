@@ -15,7 +15,6 @@
                 <th>Date_arrivee</th>
                 <th>Heure_depart</th>
                 <th>Heure_arrivee</th>
-                <th>Relation</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -29,7 +28,6 @@
                 <td>{{ trajet.dateArrivee ? trajet.dateArrivee|date('Y-m-d') : '' }}</td>
                 <td>{{ trajet.heureDepart ? trajet.heureDepart|date('H:i:s') : '' }}</td>
                 <td>{{ trajet.heureArrivee ? trajet.heureArrivee|date('H:i:s') : '' }}</td>
-                <td>{{ trajet.relation ? trajet.relation|date('H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('trajet_show', {'id': trajet.id}) }}">show</a>
                     <a href="{{ path('trajet_edit', {'id': trajet.id}) }}">edit</a>
@@ -37,7 +35,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="8">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

@@ -30,9 +30,9 @@ class Reservation
     private $annulee;
 
     /**
-     * @ORM\OneToMany(targetEntity=Passager::class, mappedBy="reservation")
+     * @ORM\ManyToOne(targetEntity=Trajet::class, inversedBy="reservation")
      */
-    private $relation;
+    private $trajet;
 
     /**
      * @ORM\ManyToOne(targetEntity=Passager::class, inversedBy="reservations")
@@ -40,20 +40,9 @@ class Reservation
     private $passager;
 
     /**
-     * @ORM\OneToMany(targetEntity=Trajet::class, mappedBy="trajet")
+     * @ORM\OneToMany(targetEntity=Passager::class, mappedBy="reservation")
      */
-    private $trajets;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Trajet::class, inversedBy="reservations")
-     */
-    private $trajet;
-
-    public function __construct()
-    {
-        $this->relation = new ArrayCollection();
-        $this->trajets = new ArrayCollection();
-    }
+   
 
     public function getId(): ?int
     {
@@ -84,32 +73,14 @@ class Reservation
         return $this;
     }
 
-    /**
-     * @return Collection|Passager[]
-     */
-    public function getRelation(): Collection
+    public function getTrajet(): ?Trajet
     {
-        return $this->relation;
+        return $this->trajet;
     }
 
-    public function addRelation(Passager $relation): self
+    public function setTrajet(?Trajet $trajet): self
     {
-        if (!$this->relation->contains($relation)) {
-            $this->relation[] = $relation;
-            $relation->setReservation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRelation(Passager $relation): self
-    {
-        if ($this->relation->removeElement($relation)) {
-            // set the owning side to null (unless already changed)
-            if ($relation->getReservation() === $this) {
-                $relation->setReservation(null);
-            }
-        }
+        $this->trajet = $trajet;
 
         return $this;
     }
@@ -126,45 +97,5 @@ class Reservation
         return $this;
     }
 
-    /**
-     * @return Collection|Trajet[]
-     */
-    public function getTrajets(): Collection
-    {
-        return $this->trajets;
-    }
-
-    public function addTrajet(Trajet $trajet): self
-    {
-        if (!$this->trajets->contains($trajet)) {
-            $this->trajets[] = $trajet;
-            $trajet->setTrajet($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTrajet(Trajet $trajet): self
-    {
-        if ($this->trajets->removeElement($trajet)) {
-            // set the owning side to null (unless already changed)
-            if ($trajet->getTrajet() === $this) {
-                $trajet->setTrajet(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getTrajet(): ?Trajet
-    {
-        return $this->trajet;
-    }
-
-    public function setTrajet(?Trajet $trajet): self
-    {
-        $this->trajet = $trajet;
-
-        return $this;
-    }
+   
 }
