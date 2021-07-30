@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Train{% endblock %}
+
+{% block body %}
+    <h1>Train</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ train.id }}</td>
+            </tr>
+            <tr>
+                <th>Numero_train</th>
+                <td>{{ train.numeroTrain }}</td>
+            </tr>
+            <tr>
+                <th>Heure_depart</th>
+                <td>{{ train.heureDepart ? train.heureDepart|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Heure_arrivee</th>
+                <td>{{ train.heureArrivee ? train.heureArrivee|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_depart</th>
+                <td>{{ train.dateDepart ? train.dateDepart|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_arrivee</th>
+                <td>{{ train.dateArrivee ? train.dateArrivee|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('train_index') }}">back to list</a>
+
+    <a href="{{ path('train_edit', {'id': train.id}) }}">edit</a>
+
+    {{ include('train/_delete_form.html.twig') }}
+{% endblock %}

@@ -39,9 +39,20 @@ class Reservation
      */
     private $passager;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Trajet::class, mappedBy="trajet")
+     */
+    private $trajets;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Trajet::class, inversedBy="reservations")
+     */
+    private $trajet;
+
     public function __construct()
     {
         $this->relation = new ArrayCollection();
+        $this->trajets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -111,6 +122,48 @@ class Reservation
     public function setPassager(?Passager $passager): self
     {
         $this->passager = $passager;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Trajet[]
+     */
+    public function getTrajets(): Collection
+    {
+        return $this->trajets;
+    }
+
+    public function addTrajet(Trajet $trajet): self
+    {
+        if (!$this->trajets->contains($trajet)) {
+            $this->trajets[] = $trajet;
+            $trajet->setTrajet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTrajet(Trajet $trajet): self
+    {
+        if ($this->trajets->removeElement($trajet)) {
+            // set the owning side to null (unless already changed)
+            if ($trajet->getTrajet() === $this) {
+                $trajet->setTrajet(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getTrajet(): ?Trajet
+    {
+        return $this->trajet;
+    }
+
+    public function setTrajet(?Trajet $trajet): self
+    {
+        $this->trajet = $trajet;
 
         return $this;
     }

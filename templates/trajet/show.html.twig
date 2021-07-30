@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trajet{% endblock %}
+
+{% block body %}
+    <h1>Trajet</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ trajet.id }}</td>
+            </tr>
+            <tr>
+                <th>Lieu_depart</th>
+                <td>{{ trajet.lieuDepart }}</td>
+            </tr>
+            <tr>
+                <th>Lieu_arrive</th>
+                <td>{{ trajet.lieuArrive }}</td>
+            </tr>
+            <tr>
+                <th>Date_depart</th>
+                <td>{{ trajet.dateDepart ? trajet.dateDepart|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_arrivee</th>
+                <td>{{ trajet.dateArrivee ? trajet.dateArrivee|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Heure_depart</th>
+                <td>{{ trajet.heureDepart ? trajet.heureDepart|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Heure_arrivee</th>
+                <td>{{ trajet.heureArrivee ? trajet.heureArrivee|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Relation</th>
+                <td>{{ trajet.relation ? trajet.relation|date('H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('trajet_index') }}">back to list</a>
+
+    <a href="{{ path('trajet_edit', {'id': trajet.id}) }}">edit</a>
+
+    {{ include('trajet/_delete_form.html.twig') }}
+{% endblock %}
