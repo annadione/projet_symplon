@@ -40,6 +40,11 @@ class Reservation
     private $passager;
 
     /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reservations")
+     */
+    private $user;
+
+    /**
      * @ORM\OneToMany(targetEntity=Passager::class, mappedBy="reservation")
      */
    
@@ -93,6 +98,18 @@ class Reservation
     public function setPassager(?Passager $passager): self
     {
         $this->passager = $passager;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
