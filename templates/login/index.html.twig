@@ -9,9 +9,11 @@
             <form method="post" action="{{ path('login') }}">
                 <lable>login</lable><br>
                 <input type="text" name="_username" placeholder="saisissez le login"><br>
-                <lable>login</lable><br>
+                <lable>password</lable><br>
                 <input type="password" name="_password" placeholder="saisissez le login"><br><br>
-                <input type="submit" value="Se connecter">
+                <input type="submit" value="Se connecter"><br>
+
+                <a href="{{path('user_new')}}">Creer un compte</a>
             </form>
         </div>
 {% endblock %}

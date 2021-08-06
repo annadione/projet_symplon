@@ -78,7 +78,7 @@ class PassagerController extends AbstractController
         ]);
     }
 
-    /**
+    /** 
      * @Route("/{id}", name="passager_delete", methods={"POST"})
      */
     public function delete(Request $request, Passager $passager): Response

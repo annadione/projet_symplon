@@ -44,11 +44,7 @@ class Reservation
      */
     private $user;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Passager::class, mappedBy="reservation")
-     */
    
-
     public function getId(): ?int
     {
         return $this->id;
