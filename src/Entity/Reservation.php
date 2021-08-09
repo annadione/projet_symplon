@@ -43,10 +43,6 @@ class Reservation
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reservations")
      */
     private $user;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Passager::class, mappedBy="reservation")
-     */
    
 
     public function getId(): ?int
