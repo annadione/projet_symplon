@@ -9,6 +9,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PassagerType extends AbstractType
 {
+    
+    
+
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -25,4 +29,5 @@ class PassagerType extends AbstractType
             'data_class' => Passager::class,
         ]);
     }
+    
 }
